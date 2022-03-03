@@ -20,33 +20,8 @@ const AppDataProvider = (props: any) => {
   const [searchValue, setSearchVal] = useState<string>("");
   const [filterValue, setFilterVal] = useState<sorter>("ASC");
 
-  // useEffect(() => {
-  //   console.log("Context useEffect 2");
-  //   (async () => {
-  //     const data = await getProperties("", null, "DES");
-  //     console.log(data);
-  //     setProperties(data);
-  //     console.log(properties);
-  //   })();
-
-  // async function fetchProperties() {
-  //   const data = await getProperties("", null, "DES");
-  //   console.log(data);
-  //   setProperties(data);
-  //   console.log(properties);
-  // }
-  // fetchProperties();
-  // }, []);
-
-  // const setPropertiesList = (val: IProperty[]): void => {
-  //   console.log("setting properties");
-
-  //   setProperties(val);
-  // };
-
   const setPropertiesList = (list: IProperty[]): void => {
     console.log(list);
-    console.log(properties);
 
     setProperties(list);
   };
@@ -59,17 +34,19 @@ const AppDataProvider = (props: any) => {
     setFilterVal(val);
   };
 
-  <Context.Provider
-    value={{
-      properties,
-      setPropertiesList,
-      searchValue,
-      setSearchValue,
-      filterValue,
-      setFilterValue,
-    }}>
-    {props.children}
-  </Context.Provider>;
+  return (
+    <Context.Provider
+      value={{
+        properties,
+        setPropertiesList,
+        searchValue,
+        setSearchValue,
+        filterValue,
+        setFilterValue,
+      }}>
+      {props.children}
+    </Context.Provider>
+  );
 };
 
 export default AppDataProvider;

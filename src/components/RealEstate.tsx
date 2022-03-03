@@ -6,12 +6,16 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
-import Button from "@mui/material/Button";
 import { useCont } from "../context/appContext";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
 
 export default function RealEstate() {
-  //   const [data, setData] = useState<IProperty | null>(null);
   const [sort, setSort] = useState<sorter>("ASC");
+  const [roomNum, setRoomNum] = useState<number | null>(null);
+  const [address, setAddress] = useState<string>("");
   const appContext = useCont();
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -20,13 +24,11 @@ export default function RealEstate() {
 
   useEffect(() => {
     async function fetchProperties() {
-      const data = await getProperties("", null, "DES");
-      console.log(data);
+      const data = await getProperties(address, roomNum, sort);
       appContext.setPropertiesList(data);
-      console.log(appContext.properties);
     }
     fetchProperties();
-  }, [appContext.properties]);
+  }, [address, roomNum, sort]);
 
   return (
     <div className="main-container">
@@ -40,8 +42,14 @@ export default function RealEstate() {
         }}
         noValidate
         autoComplete="off">
-        <TextField label="Search by address" />
-        <TextField label="Search by num of rooms" />
+        <TextField
+          onChange={(e) => setAddress(e.target.value)}
+          label="Search by address"
+        />
+        <TextField
+          onChange={(e) => setRoomNum(+e.target.value)}
+          label="Search by num of rooms"
+        />
         <FormControl sx={{ m: 1, minWidth: 120 }}>
           <InputLabel id="select-label">Sort By Price</InputLabel>
           <Select
@@ -53,23 +61,33 @@ export default function RealEstate() {
             <MenuItem value={"DES"}>Descending</MenuItem>
           </Select>
         </FormControl>
-        <Button color="secondary" size="large" variant="outlined">
-          Search!
-        </Button>
       </Box>
 
       <div className="properties-container">
-        text
         {appContext.properties.map((p, i) => {
-          console.log(p);
-          return <div>{i}</div>;
+          return (
+            <Card key={i} sx={{ maxWidth: 345 }}>
+              <CardMedia
+                component="img"
+                height="140"
+                image={p.image}
+                alt="green iguana"
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  {p.address}
+                </Typography>
+                <Typography gutterBottom variant="subtitle2" component="div">
+                  price: {p.price}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {`Apartment located in floor ${p.floor} out of ${p.num_floors} floors building, having ${p.elevator} elevator.s, and has ${p.num_rooms} rooms sums up to a ${p.sqm}sqm in total and has ${p.parking} parking slot.s`}
+                </Typography>
+              </CardContent>
+            </Card>
+          );
         })}
       </div>
     </div>
-    // data && (
-    //   <div>
-    //     <img src={data.image} alt="" />
-    //   </div>
-    // )
   );
 }
