@@ -30,3 +30,6 @@ export const addresses = [
   "9 Washington Ave Mullica Hill, New Jersey(NJ), 08062",
   "27 Cheever St Revere, Massachusetts(MA), 02151",
 ];
+
+export const mapToken =
+  "pk.eyJ1IjoiZWxhZGFoZHV0IiwiYSI6ImNsMGI5anJpYjAxemwzaW9tOGN0ODgzNXoifQ.qItT-8Yy__cQotivLIcNQA";

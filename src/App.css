@@ -25,3 +25,54 @@
 .MuiCard-root {
   margin: 5px;
 }
+
+.MuiCard-root:hover {
+  z-index: 9999;
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.map-comp-holder {
+  margin-top: 2rem;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.lng-lat-holder {
+}
+
+.map-container {
+  margin-top: 2vh;
+  height: 68vh;
+}
+
+.sidebar {
+  background-color: rgba(35, 55, 75, 0.9);
+  color: #fff;
+  padding: 6px 12px;
+  font-family: monospace;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 12px;
+  border-radius: 4px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+a:hover {
+  color: rgba(137, 43, 226, 0.52);
+}
+
+.nav-container {
+  display: flex;
+  padding: 0 30px;
+  background: #8080809e;
+  column-gap: 20px;
+  color: white;
+}

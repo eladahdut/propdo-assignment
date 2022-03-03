@@ -6,7 +6,7 @@ export type sorter = "ASC" | "DES";
 export const getProperties = async (
   search = "",
   rooms: number | null = null,
-  sort: sorter = "ASC"
+  sort: string
 ): Promise<IProperty[]> => {
   const res = await fetch("http://localhost:3000/transactions.json");
   const data: { properties: IProperty[]; total: number } = await res.json();

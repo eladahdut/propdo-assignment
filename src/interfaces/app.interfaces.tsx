@@ -18,6 +18,8 @@ export interface IContext {
   setPropertiesList: (list: IProperty[]) => void;
   searchValue: string;
   setSearchValue: (value: string) => void;
-  filterValue: string;
-  setFilterValue: (value: sorter) => void;
+  sortValue: string;
+  setSortValue: (value: sorter) => void;
+  numOfRooms: number | null;
+  setNumOfRooms: (value: number | null) => void;
 }

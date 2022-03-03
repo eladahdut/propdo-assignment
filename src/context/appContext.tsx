@@ -1,14 +1,16 @@
-import { useState, createContext, useContext, useEffect } from "react";
+import { useState, createContext, useContext } from "react";
 import { IContext, IProperty } from "../interfaces/app.interfaces";
-import { getProperties, sorter } from "../services/api.service";
+import { sorter } from "../services/api.service";
 
 export const Context = createContext<IContext>({
   properties: [],
   setPropertiesList: (list: IProperty[]) => {},
   searchValue: "",
   setSearchValue: (value: string) => {},
-  filterValue: "ASC",
-  setFilterValue: (value: sorter) => {},
+  sortValue: "ASC",
+  setSortValue: (value: sorter) => {},
+  numOfRooms: null,
+  setNumOfRooms: (value: number | null) => {},
 });
 
 export const useCont = () => {
@@ -18,11 +20,10 @@ export const useCont = () => {
 const AppDataProvider = (props: any) => {
   const [properties, setProperties] = useState<IProperty[]>([]);
   const [searchValue, setSearchVal] = useState<string>("");
-  const [filterValue, setFilterVal] = useState<sorter>("ASC");
+  const [sortValue, setSorterValue] = useState<sorter>("ASC");
+  const [numOfRooms, setRoomsNum] = useState<number | null>(null);
 
   const setPropertiesList = (list: IProperty[]): void => {
-    console.log(list);
-
     setProperties(list);
   };
 
@@ -30,8 +31,12 @@ const AppDataProvider = (props: any) => {
     setSearchVal(val);
   };
 
-  const setFilterValue = (val: sorter): void => {
-    setFilterVal(val);
+  const setSortValue = (val: sorter): void => {
+    setSorterValue(val);
+  };
+
+  const setNumOfRooms = (val: number | null): void => {
+    setRoomsNum(val);
   };
 
   return (
@@ -41,8 +46,10 @@ const AppDataProvider = (props: any) => {
         setPropertiesList,
         searchValue,
         setSearchValue,
-        filterValue,
-        setFilterValue,
+        sortValue,
+        setSortValue,
+        numOfRooms,
+        setNumOfRooms,
       }}>
       {props.children}
     </Context.Provider>
