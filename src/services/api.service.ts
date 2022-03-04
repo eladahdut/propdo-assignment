@@ -8,14 +8,12 @@ export const getProperties = async (
   rooms: number | null = null,
   sort: string
 ): Promise<IProperty[]> => {
-  const res = await fetch("http://localhost:3000/transactions.json");
+  const res = await fetch("transactions.json");
   const data: { properties: IProperty[]; total: number } = await res.json();
 
   const properties = data.properties.map((p, i) => {
     p.address = addresses[i];
-    p.image = `http://localhost:3000/images/prop${
-      Math.floor(Math.random() * 5) + 1
-    }.jpg`;
+    p.image = `images/prop${Math.floor(Math.random() * 5) + 1}.jpg`;
     return p;
   });
   if (!search || search === "") {
