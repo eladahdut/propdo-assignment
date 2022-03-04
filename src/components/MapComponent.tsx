@@ -1,5 +1,9 @@
+//@ts-nocheck
 import React, { useRef, useEffect, useState } from "react";
-import mapboxgl, { Map, MapMouseEvent } from "mapbox-gl";
+/* eslint import/no-webpack-loader-syntax: off */
+//@ts-ignore
+import mapboxgl from "!mapbox-gl";
+import { Map, MapMouseEvent } from "mapbox-gl";
 import TextField from "@mui/material/TextField";
 import { mapToken } from "../App.const";
 
